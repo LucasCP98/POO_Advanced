@@ -53,13 +53,44 @@ class Serie(Programa):
         self.temporadas = temporada
 
     def __str__(self):
-        return f"FILME: {self._nome} | ANO: {self.ano} | AVALIAÇÃO: {self.estrelas()} | LIKES: {self.dar_like()} | " \
+        return f"SÉRIE: {self._nome} | ANO: {self.ano} | AVALIAÇÃO: {self.estrelas()} | LIKES: {self.dar_like()} | " \
                f"TEMPORADA: {self.temporadas}"
 
 
-vingadores = Filme(nome="the avengers", ano=2018, avaliacao=5, duracao=160)
-sintonia = Serie(nome="sintonia", ano=2019, avaliacao=3, temporada=5)
+class Playlist:
+    def __init__(self, nome, programas):
+        self.nome = nome
+        self._programas = programas
 
-filmes_e_series = [vingadores, sintonia]
-for programa in filmes_e_series:
+    # Vale resltar que quando eu adiciono essa função (def __getitem__(self, item):) o python abilita a variavel
+    # "playlist_fim_de_semana" abaixo ser interavel, caso contrario dará o erro: TypeError: 'Playlist' object is
+    # not iterable, o nome dessa capacidade do python se chama: duck typing.
+    def __getitem__(self, item):
+        return self._programas[item]
+
+    @property
+    def programas(self):
+        return self._programas
+
+    @property
+    def tamanho(self):
+        return len(self._programas)
+
+
+vingadores = Filme(nome="vingadores", ano=2018, avaliacao=5, duracao=160)
+toy_story = Filme(nome="toy story", ano=1998, avaliacao=5, duracao=110)
+velozes_e_furiosos = Filme(nome="velozes e furiosos", ano=2018, avaliacao=5, duracao=160)
+bicho_vai_pegar = Filme(nome="bicho vai pegar", ano=2018, avaliacao=5, duracao=160)
+madagascar = Filme(nome="madagascar", ano=2018, avaliacao=5, duracao=60)
+sintonia = Serie(nome="sintonia", ano=2019, avaliacao=3, temporada=5)
+naruto = Serie(nome="naruto", ano=2019, avaliacao=5, temporada=15)
+pokemon = Serie(nome="pokemon", ano=2019, avaliacao=5, temporada=15)
+blindspot = Serie(nome="blindspot", ano=2019, avaliacao=4, temporada=2)
+scorpion = Serie(nome="scorpion", ano=2019, avaliacao=4, temporada=20)
+
+filmes_e_series = [vingadores, toy_story, velozes_e_furiosos, bicho_vai_pegar, madagascar, sintonia, naruto, pokemon,
+                   blindspot, scorpion]
+playlist_fim_de_semana = Playlist("Fim de semana", filmes_e_series)
+print(f"Tamanho da Playlist fim de semana {playlist_fim_de_semana.tamanho} filmes e séries.")
+for programa in playlist_fim_de_semana:
     print(programa)
