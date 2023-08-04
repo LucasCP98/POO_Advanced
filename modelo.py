@@ -71,10 +71,9 @@ class Playlist:
     @property
     def programas(self):
         return self._programas
-
-    @property
-    def tamanho(self):
-        return len(self._programas)
+    #
+    # def __len__(self):
+    #     return len(self._programas)
 
 
 vingadores = Filme(nome="vingadores", ano=2018, avaliacao=5, duracao=160)
@@ -91,6 +90,6 @@ scorpion = Serie(nome="scorpion", ano=2019, avaliacao=4, temporada=20)
 filmes_e_series = [vingadores, toy_story, velozes_e_furiosos, bicho_vai_pegar, madagascar, sintonia, naruto, pokemon,
                    blindspot, scorpion]
 playlist_fim_de_semana = Playlist("Fim de semana", filmes_e_series)
-print(f"Tamanho da Playlist fim de semana {playlist_fim_de_semana.tamanho} filmes e séries.")
+print(f"Tamanho da Playlist fim de semana {len(filmes_e_series)} filmes e séries.")
 for programa in playlist_fim_de_semana:
     print(programa)
